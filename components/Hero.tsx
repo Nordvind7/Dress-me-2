@@ -1,77 +1,77 @@
 
 import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 
 const Hero: React.FC = () => {
   const { scrollY } = useScroll();
-  const y1 = useTransform(scrollY, [0, 800], [0, 180]);
-  const y2 = useTransform(scrollY, [0, 800], [0, -120]);
-  const opacity = useTransform(scrollY, [0, 400], [1, 0]);
+  
+  // Плавные значения для параллакса
+  const y1 = useSpring(useTransform(scrollY, [0, 1000], [0, 200]), { stiffness: 50, damping: 20 });
+  const y2 = useSpring(useTransform(scrollY, [0, 1000], [0, -150]), { stiffness: 50, damping: 20 });
+  const opacity = useTransform(scrollY, [0, 500], [1, 0]);
+  const scale = useTransform(scrollY, [0, 500], [1, 0.95]);
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-48 pb-24">
-      <div className="max-w-[1800px] mx-auto w-full px-6">
+    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-40 md:pt-48 pb-24">
+      <motion.div style={{ opacity, scale }} className="max-w-[1800px] mx-auto w-full px-6 md:px-12">
         
-        {/* Декоративные пятна света */}
-        <motion.div 
-          style={{ opacity }}
-          className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[40vw] h-[40vw] bg-[#A39382]/5 rounded-full blur-[140px] pointer-events-none z-0"
-        />
+        {/* Абстрактное освещение */}
+        <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-[#A39382]/5 rounded-full blur-[160px] pointer-events-none -z-10" />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start relative z-10">
           
           <div className="lg:col-span-9">
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="flex items-center gap-6 mb-10">
-                <span className="h-[1px] w-16 bg-black/10" />
-                <span className="text-[10px] uppercase font-black tracking-[0.6em] text-[#A39382]">
-                  The New Standard of Elegance
+              <div className="flex items-center gap-6 mb-12">
+                <span className="h-[1px] w-20 bg-black/10" />
+                <span className="text-[10px] uppercase font-black tracking-[0.7em] text-[#A39382] whitespace-nowrap">
+                  Premium Digital Experience
                 </span>
               </div>
-              <h1 className="text-[14vw] lg:text-[11.5vw] font-black leading-[0.78] tracking-tighter uppercase mb-20">
-                Ваш <br />
-                <span className="serif italic font-light lowercase text-[#A39382] ml-[6vw]">персональный</span> <br />
-                стиль
+              <h1 className="text-[14vw] lg:text-[12vw] font-black leading-[0.75] tracking-tighter uppercase mb-16 md:mb-24">
+                Ваша <br />
+                <span className="serif italic font-light text-[#A39382] ml-[5vw] lowercase tracking-normal">новая</span> <br />
+                версия
               </h1>
             </motion.div>
           </div>
 
-          <div className="lg:col-span-3 lg:mt-32">
+          <div className="lg:col-span-3 lg:pt-32">
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1.2, duration: 1.2 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1, duration: 1.2 }}
               className="space-y-12"
             >
-              <p className="text-sm font-light leading-relaxed text-gray-500 max-w-xs border-l-2 border-[#A39382]/20 pl-6">
-                Мы создали систему, в которой стиль — это не удача, а алгоритм. Достигайте большего, выглядя безупречно.
+              <p className="text-base font-light leading-relaxed text-gray-400 max-w-xs border-l-[1px] border-[#A39382] pl-8">
+                Освободите пространство для действительно важных решений. Мы превратили хаос гардероба в чистую стратегию успеха.
               </p>
               
-              <div className="space-y-6">
+              <div className="space-y-8">
                 <motion.a
-                  whileHover={{ scale: 1.02, backgroundColor: "#A39382" }}
-                  whileTap={{ scale: 0.98 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   href="https://t.me/dress_me_shop_bot"
-                  className="block bg-black text-white px-12 py-7 rounded-full text-[10px] uppercase font-bold tracking-[0.4em] text-center transition-all duration-500 shadow-xl shadow-black/5"
+                  className="block bg-black text-white px-10 py-7 rounded-full text-[10px] uppercase font-bold tracking-[0.5em] text-center shadow-[0_20px_50px_rgba(0,0,0,0.1)] hover:shadow-2xl hover:bg-[#A39382] transition-all duration-700"
                 >
                   Начать разбор
                 </motion.a>
-                <div className="flex justify-center gap-2 opacity-20">
-                  {[...Array(3)].map((_, i) => (
-                    <div key={i} className="w-8 h-[1px] bg-black" />
-                  ))}
+                <div className="flex justify-between items-center px-4 opacity-30">
+                  <span className="text-[8px] uppercase font-bold tracking-widest">Scroll</span>
+                  <div className="w-12 h-[1px] bg-black" />
+                  <span className="text-[8px] uppercase font-bold tracking-widest">Explore</span>
                 </div>
               </div>
             </motion.div>
           </div>
         </div>
 
-        {/* Параллакс-сетка изображений */}
-        <div className="mt-40 grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-10">
+        {/* Сетка изображений с параллаксом */}
+        <div className="mt-40 grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-10">
           {[
             { img: "https://i.postimg.cc/NfLwVMGj/2026_02_16_09_21_44.jpg", y: y1 },
             { img: "https://i.postimg.cc/wT3dPvx6/2026_02_16_09_21_58.jpg", y: y2 },
@@ -81,17 +81,17 @@ const Hero: React.FC = () => {
             <motion.div 
               key={i}
               style={{ y: item.y }}
-              className={`aspect-[3/4.5] rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-1000 view-target ${i > 1 ? 'hidden lg:block' : ''} ${i % 2 !== 0 ? 'mt-24' : ''}`}
+              className={`aspect-[3/4.5] rounded-[3rem] overflow-hidden shadow-sm hover:shadow-3xl transition-all duration-1000 view-target ${i > 1 ? 'hidden lg:block' : ''} ${i % 2 !== 0 ? 'mt-24' : ''}`}
             >
               <img 
                 src={item.img} 
-                className="w-full h-full object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-[1.5s] scale-105 hover:scale-110" 
-                alt="Brand aesthetic" 
+                className="w-full h-full object-cover grayscale-[0.1] hover:grayscale-0 transition-all duration-[2s] scale-110 hover:scale-100" 
+                alt="Editorial look" 
               />
             </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
