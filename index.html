@@ -9,6 +9,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        // Полифилл для библиотек, которые ожидают среду Node (критично для Framer Motion)
+        window.process = { env: { NODE_ENV: 'production' } };
+        
+        // Глобальный обработчик ошибок для отладки
+        window.onerror = function(msg, url, line, col, error) {
+            console.error("Global Error: " + msg + " at " + url + ":" + line);
+            // Если экран все еще белый, можно вывести сообщение пользователю (опционально)
+        };
+    </script>
     <style>
         :root {
             --bg-primary: #FAF9F6;
@@ -23,7 +33,7 @@
             cursor: none !important;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             * { cursor: auto !important; }
         }
 
@@ -33,7 +43,6 @@
             color: var(--text-primary);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
         
         .serif { font-family: 'Cormorant Garamond', serif; }
@@ -52,9 +61,6 @@
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: var(--accent); }
 
-        .section-padding { padding: 10rem 1.5rem; }
-        @media (max-width: 768px) { .section-padding { padding: 6rem 1rem; } }
-        
         ::selection { background-color: var(--accent); color: white; }
 
         @keyframes spin-slow {
@@ -62,26 +68,23 @@
             to { transform: rotate(360deg); }
         }
         .animate-spin-slow { animation: spin-slow 15s linear infinite; }
-        
-        /* Исправление дрожания в Chrome */
-        .backface-hidden {
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-        }
     </style>
-<script type="importmap">
+    <script type="importmap">
 {
   "imports": {
-    "lucide-react": "https://esm.sh/lucide-react@^0.474.0",
-    "react/": "https://esm.sh/react@^19.0.0/",
-    "react": "https://esm.sh/react@^19.0.0",
-    "react-dom/": "https://esm.sh/react-dom@^19.0.0/",
-    "framer-motion": "https://esm.sh/framer-motion@^12.0.0"
+    "react": "https://esm.sh/react@19.0.0",
+    "react-dom": "https://esm.sh/react-dom@19.0.0",
+    "react-dom/client": "https://esm.sh/react-dom@19.0.0/client",
+    "framer-motion": "https://esm.sh/framer-motion@11.11.17?external=react,react-dom",
+    "lucide-react": "https://esm.sh/lucide-react@0.474.0?external=react,react-dom",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/"
   }
 }
 </script>
 </head>
 <body class="noise-overlay">
     <div id="root"></div>
+    <script type="module" src="index.tsx"></script>
 </body>
 </html>
