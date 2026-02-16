@@ -4,63 +4,67 @@ import { motion } from 'framer-motion';
 
 const About: React.FC = () => {
   return (
-    <section id="about" className="section-padding bg-[#FDFCFB] overflow-hidden">
+    <section id="about" className="section-padding bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-24 items-center">
           
-          <div className="lg:col-span-5 relative order-2 lg:order-1">
+          <div className="lg:col-span-6 relative order-2 lg:order-1">
             <motion.div
-              initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
-              whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-              transition={{ duration: 1.2 }}
-              className="aspect-[4/6] rounded-[60px] overflow-hidden shadow-3xl z-10 relative"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+              className="aspect-[4/5.5] rounded-[80px] overflow-hidden shadow-2xl relative z-10"
             >
-              <img src="https://i.postimg.cc/RVqz8FC6/2026_02_16_09_23_03.jpg" className="w-full h-full object-cover scale-110" alt="Brand Aesthetics" />
+              <img src="https://i.postimg.cc/RVqz8FC6/2026_02_16_09_23_03.jpg" className="w-full h-full object-cover scale-105" alt="Brand story" />
             </motion.div>
             
-            {/* Float Badge */}
+            {/* Декоративная подложка */}
+            <div className="absolute -top-10 -left-10 w-full h-full border border-gray-100 rounded-[80px] -z-0" />
+            
             <motion.div 
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.5 }}
-              className="absolute -right-10 -bottom-10 bg-black text-white p-12 rounded-full hidden md:block z-20"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.8 }}
+              className="absolute -right-12 bottom-12 bg-black text-white p-14 rounded-full hidden xl:block z-20 shadow-2xl"
             >
-              <div className="text-4xl font-black mb-1">10+</div>
-              <div className="text-[8px] uppercase tracking-widest text-white/40">Лет Опыта</div>
+              <div className="text-5xl font-black mb-2 leading-none tracking-tighter">10+</div>
+              <div className="text-[9px] uppercase tracking-[0.3em] text-white/50 leading-tight">Лет опыта в <br/> индустрии</div>
             </motion.div>
           </div>
 
-          <div className="lg:col-span-7 order-1 lg:order-2">
+          <div className="lg:col-span-6 order-1 lg:order-2">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              className="space-y-12"
+              className="space-y-16"
             >
-              <div className="flex items-center gap-6">
-                <span className="h-px w-12 bg-[#A39382]" />
-                <span className="text-[10px] uppercase font-black tracking-[0.5em] text-[#A39382]">Our Heritage</span>
+              <div className="space-y-8">
+                <div className="flex items-center gap-6">
+                  <span className="h-[2px] w-12 bg-[#A39382]" />
+                  <span className="text-[10px] uppercase font-black tracking-[0.5em] text-[#A39382]">Our DNA</span>
+                </div>
+                
+                <h2 className="text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] uppercase">
+                  Больше чем <br />
+                  <span className="serif italic font-light text-gray-300 ml-12 lowercase tracking-normal">одежда</span>
+                </h2>
               </div>
-              
-              <h2 className="text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] uppercase">
-                Dress Me <br />
-                <span className="serif italic font-light text-gray-300 pl-[4vw]">Art of Style</span>
-              </h2>
 
-              <p className="text-lg text-gray-500 font-light leading-relaxed max-w-xl">
-                Мы — не просто бренд. Мы создаем новую культуру отношения к себе через одежду. Наше производство в Сибири — это сплав технологий и ручного мастерства.
+              <p className="text-xl text-gray-500 font-light leading-relaxed max-w-xl serif italic">
+                "Мы верим, что одежда — это мощный инструмент невербальной коммуникации. Мы создаем систему, которая помогает вам говорить на языке успеха."
               </p>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 pt-10 border-t border-gray-100">
-                <div className="space-y-4">
-                  <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-black">Миссия</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-16 pt-12 border-t border-gray-100">
+                <div className="space-y-6">
+                  <h4 className="text-[11px] font-black uppercase tracking-[0.4em] text-black">Производство</h4>
                   <p className="text-sm text-gray-500 font-light leading-relaxed">
-                    Трансформировать хаос в гармонию, даря женщинам уверенность в каждом дне.
+                    Собственный цех в Сибири позволяет нам контролировать каждый миллиметр шва.
                   </p>
                 </div>
-                <div className="space-y-4">
-                  <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-black">Качество</h4>
+                <div className="space-y-6">
+                  <h4 className="text-[11px] font-black uppercase tracking-[0.4em] text-black">Миссия</h4>
                   <p className="text-sm text-gray-500 font-light leading-relaxed">
-                    Контроль каждого стежка и эксклюзивные лекала, отточенные годами практики.
+                    Показать, что идеальный гардероб возможен без лишних трат и стресса.
                   </p>
                 </div>
               </div>
